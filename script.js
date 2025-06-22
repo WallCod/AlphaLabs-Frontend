@@ -204,7 +204,27 @@ document.addEventListener('DOMContentLoaded', () => {
     conversationHistory = JSON.parse(localStorage.getItem('conversationHistory')) || [];
 
     // URL do webhook do n8n
-    const webhookUrl = 'https://n8n.alphalabs.lat/webhook/d62dd6a8-2e8c-40a3-9cc0-b1062d705e55/chat';
+    const chatbotBackendUrl = 'https://alpha-labs.onrender.com/api/chatbot-message';
+
+    // Função para enviar mensagem ao n8n (AGORA CHAMA SEU BACKEND)
+async function sendMessageToN8n(userMessage) {
+    const sessionId = getSessionId();
+    try {
+        const response = await fetch(chatbotBackendUrl, { // MUDE AQUI
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message: userMessage, sessionId: sessionId, history: conversationHistory })
+        });
+        const data = await response.json();
+        console.log("Resposta do seu backend para o chatbot:", data); // Ajuste o log
+        return data.reply || 'Desculpe, não consegui processar sua mensagem. Tente novamente mais tarde!';
+    } catch (error) {
+        console.error("Erro ao chamar o backend para o chatbot:", error); // Ajuste o log
+        return 'Desculpe, houve um erro ao processar sua mensagem. Por favor, tente novamente!';
+    }
+}
 
     // Função para obter ou gerar um sessionId
     function getSessionId() {
@@ -216,25 +236,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return sessionId;
     }
 
-    // Função para enviar mensagem ao n8n
-    async function sendMessageToN8n(userMessage) {
-        const sessionId = getSessionId();
-        try {
-            const response = await fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ message: userMessage, sessionId: sessionId, history: conversationHistory })
-            });
-            const data = await response.json();
-            console.log("Resposta do n8n:", data);
-            return data.reply || 'Desculpe, não consegui processar sua mensagem. Tente novamente mais tarde!';
-        } catch (error) {
-            console.error("Erro ao chamar o n8n:", error);
-            return 'Desculpe, houve um erro ao processar sua mensagem. Por favor, tente novamente!';
-        }
-    }
     // Função para verificar palavras-chave e redirecionar
     function handleUserMessage(userMessage) {
         const messageLower = userMessage.toLowerCase();
