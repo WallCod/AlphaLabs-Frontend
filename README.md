@@ -32,13 +32,13 @@ Bem-vindo ao **Alpha Labs**, uma plataforma de ponta especializada em automaçã
 ---
 
 ## 🚀 Pontos Fortes
-**Variáveis de Ambiente:** Uso correto de .env e verificação de variáveis críticas antes de iniciar.
-**Segurança com Helmet:** Proteção contra vulnerabilidades comuns.
-**Rate Limiting:** Essencial para prevenir spam e ataques DoS em rotas de formulário.
-**Validação e Sanitização de Entrada:** O express-validator é uma excelente escolha, garantindo que os dados recebidos são válidos e limpos (trim, lowercase, normalizeEmail). A validação de data no passado é um bom toque.
-**Tratamento de Erros:** Middlewares de erro e try/catch nas rotas são bem implementados. A distinção de mensagem de erro entre production e development é uma prática de segurança muito boa.
-**Conexão MongoDB:** Configurações de timeout razoáveis e tratamento de erro fatal.
-**Nodemailer:** Verificação de conexão e tratamento de reenvio são robustos.
+ - **Variáveis de Ambiente:** Uso correto de .env e verificação de variáveis críticas antes de iniciar.
+ - **Segurança com Helmet:** Proteção contra vulnerabilidades comuns.
+ - **Rate Limiting:** Essencial para prevenir spam e ataques DoS em rotas de formulário.
+ - **Validação e Sanitização de Entrada:** O express-validator é uma excelente escolha, garantindo que os dados recebidos são válidos e limpos (trim, lowercase, normalizeEmail). A validação de data no passado é um bom toque.
+ - **Tratamento de Erros:** Middlewares de erro e try/catch nas rotas são bem implementados. A distinção de mensagem de erro entre production e development é uma prática de segurança muito boa.
+ - **Conexão MongoDB:** Configurações de timeout razoáveis e tratamento de erro fatal.
+ - **Nodemailer:** Verificação de conexão e tratamento de reenvio são robustos.
 
 
     
