@@ -1,0 +1,2118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "DM Sans", sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark {
+    background-color: #1a1a1a;
+    color: #f1f1f1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Cabeçalho */
+header {
+    background: linear-gradient(45deg, #679ce3, #2c5282);
+    color: white;
+    padding: 0.8rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-height: 120px;
+    overflow: visible;
+    /* Garante que o menu não seja cortado */
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    max-width: 120px;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s;
+    position: relative;
+    bottom: 10px;
+    right: 50px;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    margin-top: 5px;
+    color: #f8fafa;
+    font-family: "monospace";
+    position: relative;
+    bottom: 8px;
+    right: 50px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: 25px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #ffeb3b;
+    transform: translateY(-2px);
+}
+
+.nav-links li button#themeToggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
+    padding: 0;
+    transition: transform 0.3s;
+}
+
+.nav-links li button#themeToggle:hover {
+    transform: scale(1.2);
+}
+
+/* Responsividade do Cabeçalho */
+@media (max-width: 1024px) {
+    header .container {
+        padding: 0 15px;
+    }
+
+    .logo img {
+        max-width: 100px;
+        position: relative;
+        top: -5px;
+        right: 10px;
+    }
+
+    .logo h1 {
+        font-size: 1.5rem;
+        position: relative;
+        top: -5px;
+        right: 20px;
+    }
+
+    .nav-links li {
+        margin-left: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 10px;
+    }
+
+    .logo {
+        margin-bottom: 0;
+        justify-content: flex-start;
+    }
+
+    .logo img {
+        max-width: 90px;
+        position: relative;
+        top: 2px;
+        right: 10px;
+    }
+
+    .logo h1 {
+        font-size: 1.3rem;
+        position: relative;
+        top: 2px;
+        right: 20px;
+    }
+
+    nav {
+        width: 100%;
+        position: relative;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+        padding: 15px 0;
+        background-color: rgba(44, 82, 130, 0.9);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 101;
+        list-style: none;
+        text-align: center;
+        /* Centraliza todo o conteúdo do menu */
+        justify-content: center;
+        /* Centraliza verticalmente os itens (opcional, para ajuste fino) */
+    }
+
+    .nav-links.active {
+        display: flex !important;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+        width: 100%;
+        text-align: center;
+        /* Centraliza cada item individualmente */
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    .nav-links a,
+    .nav-links button#themeToggle {
+        display: block;
+        padding: 8px 0;
+        font-size: 1rem;
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        /* Centraliza os links e o botão */
+        margin: 0 auto;
+        /* Centraliza horizontalmente o conteúdo dentro do <li> */
+    }
+
+    .nav-links a:hover,
+    .nav-links button#themeToggle:hover {
+        color: #ffeb3b;
+    }
+
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: white;
+        padding: 5px;
+        line-height: 1;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .menu-toggle .fas {
+        transition: transform 0.3s;
+    }
+
+    .menu-toggle:hover .fas {
+        transform: scale(1.1);
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 0.5rem 0;
+    }
+
+    .logo img {
+        max-width: 80px;
+        position: relative;
+        top: 2px;
+        right: 10px;
+    }
+
+    .logo h1 {
+        font-size: 1.1rem;
+        position: relative;
+        top: 2px;
+        right: 20px;
+    }
+
+    .nav-links {
+        padding: 10px 0;
+    }
+
+    .nav-links li {
+        margin: 8px 0;
+    }
+
+    .nav-links a,
+    .nav-links button#themeToggle {
+        font-size: 0.9rem;
+    }
+
+    .menu-toggle {
+        font-size: 1.3rem;
+        padding: 3px;
+        right: 10px;
+    }
+}
+
+@media (min-width: 769px) {
+    .menu-toggle {
+        display: none;
+    }
+}
+
+@media (min-width: 1200px) {
+    header .container {
+        padding: 0 40px;
+    }
+}
+
+/* Hero */
+.hero {
+    background: linear-gradient(45deg,
+            rgba(103, 156, 227, 0.7),
+            rgba(44, 82, 130, 0.7)),
+        url("./img/hero-background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    text-align: center;
+    padding: 150px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1.5s ease-in-out;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 2s ease-in-out;
+}
+
+.hero button#demoBtn {
+    padding: 15px 30px;
+    background: linear-gradient(45deg, #ffeb3b, #ffd700);
+    color: #1a73e8;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 235, 59, 0.5);
+}
+
+.hero button#demoBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 235, 59, 0.7);
+}
+
+.result {
+    margin-top: 20px;
+    font-weight: 500;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Responsividade do Hero */
+@media (max-width: 768px) {
+    .hero {
+        padding: 100px 20px;
+    }
+
+    .hero h2 {
+        font-size: 2.2rem;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+    }
+
+    .hero button#demoBtn {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 80px 15px;
+    }
+
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+
+    .hero p {
+        font-size: 0.9rem;
+    }
+
+    .hero button#demoBtn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .hero p {
+        max-width: 600px;
+    }
+}
+
+/* Modal para Agendamento */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease-in-out;
+    margin: 20px 0;
+}
+
+body.dark .modal-content {
+    background: #333;
+    color: #f1f1f1;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: #1a73e8;
+}
+
+body.dark .close-btn {
+    color: #a0aec0;
+}
+
+body.dark .close-btn:hover {
+    color: #679ce3;
+}
+
+.modal h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #1a73e8;
+    text-align: center;
+}
+
+body.dark .modal h2 {
+    color: #679ce3;
+}
+
+.form-group {
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+body.dark .form-group label {
+    color: #f1f1f1;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: #fff;
+    color: #333;
+    transition: border-color 0.3s, background 0.3s;
+}
+
+body.dark .form-group input,
+body.dark .form-group textarea {
+    background: #444;
+    border-color: #666;
+    color: #f1f1f1;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #ffeb3b;
+    outline: none;
+}
+
+.form-group textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+.modal button[type="submit"] {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #ffeb3b, #ffd700);
+    color: #1a73e8;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 235, 59, 0.5);
+    width: 100%;
+    margin-top: 10px;
+}
+
+.modal button[type="submit"]:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 235, 59, 0.7);
+}
+
+/* Responsividade do Modal */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 85%;
+        max-width: 350px;
+        padding: 10px;
+    }
+
+    .modal h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 6px;
+        font-size: 0.8rem;
+    }
+
+    .modal button[type="submit"] {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        width: 90%;
+        padding: 10px;
+        max-width: 300px;
+    }
+
+    .modal h2 {
+        font-size: 1.2rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 5px;
+        font-size: 0.7rem;
+    }
+
+    .modal button[type="submit"] {
+        padding: 6px 12px;
+        font-size: 0.7rem;
+    }
+}
+
+/* Pop-up de Sucesso */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.popup-content {
+    background: linear-gradient(135deg, #679ce3, #2c5282);
+    padding: 25px;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+}
+
+.popup-content p {
+    margin: 0 0 15px;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.popup-content button {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #ffeb3b, #ffd700);
+    color: #1a73e8;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 235, 59, 0.5);
+}
+
+.popup-content button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 235, 59, 0.7);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Responsividade do Pop-up */
+@media (max-width: 768px) {
+    .popup-content {
+        max-width: 350px;
+        width: 85%;
+        padding: 20px;
+    }
+
+    .popup-content p {
+        font-size: 1rem;
+    }
+
+    .popup-content button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .popup-content {
+        padding: 15px;
+        max-width: 300px;
+        width: 90%;
+    }
+
+    .popup-content p {
+        font-size: 0.9rem;
+    }
+
+    .popup-content button {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+/*Balões acima do chatbot*/
+.chatbot-wrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000; /* Garante que o wrapper fique acima de outros elementos */
+}
+
+.chatbot-bubbles {
+    position: relative;
+    bottom: 80px;
+    right: 0;
+    display: flex;
+    flex-direction: column; /* Disposição horizontal (um em cima do outro) */
+    align-items: center; /* Alinha os balões verticalmente no centro */
+    gap: 10px; /* Espaço horizontal entre os balões */
+    z-index: 1000;
+}
+
+.bubble {
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #333;
+    padding: 8px 12px; /* Ajustado para um tamanho mais compacto */
+    border-radius: 5px; /* Formato completamente retangular */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    max-width: 320px; /* Ajustado para um tamanho mais compacto */
+    font-size: 14px;
+    line-height: 1;
+    font-family: Arial, sans-serif;
+}
+
+.bubble-2 {
+    border-radius: 5px; /* Mesmo border-radius para consistência */
+    position: relative;
+    left: 55px;
+    
+}
+
+.chatbot-input {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    background-color: white;
+}
+
+.chatbot-input input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Resposividade dos Balões */
+@media (max-width: 768px) {
+    .chatbot-wrapper {
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .chatbot-bubbles {
+        bottom: 60px;
+        gap: 5px; /* Reduz o espaço entre os balões */
+    }
+
+    .bubble {
+        font-size: 12px;
+        max-width: 280px; /* Ajusta tamanho para telas menores */
+    }
+
+    .bubble-2 {
+        left: 30px; /* Reposiciona em telas pequenas */
+    }
+
+    .chatbot-input input {
+        padding: 6px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chatbot-bubbles {
+        bottom: 40px;
+    }
+
+    .bubble {
+        font-size: 10px;
+        max-width: 240px;
+    }
+
+    .bubble-2 {
+        left: 10px;
+    }
+
+    .chatbot-input {
+        gap: 5px; /* Espaço menor entre os elementos */
+    }
+
+    .chatbot-input input {
+        font-size: 10px;
+    }
+}
+
+/* Estilo do botão "X" */
+.close-bubbles {
+    position: absolute;
+    top: -25px; /* Posiciona o "X" acima do primeiro balão */
+    right: 5px;
+    cursor: pointer;
+    font-size: 14px; /* Aumenta o tamanho do "X" */
+    font-weight: bold;
+    color: #666; /* Cor mais escura para melhor contraste */
+    background-color: #fff;
+    border-radius: 50%;
+    width: 20px; /* Aumenta o tamanho do botão */
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+    transition: transform 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+    z-index: 1001;
+}
+
+.close-bubbles:hover {
+    transform: scale(1.2); /* Aumenta o botão ao passar o mouse */
+    color: #ff0000; /* Muda a cor do "X" para vermelho */
+    background-color: #f8f8f8; /* Leve mudança no fundo */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3); /* Sombra mais forte */
+}
+
+/* Responsividade do botão "X" */
+@media (max-width: 768px) {
+    .close-bubbles {
+        font-size: 12px;
+        width: 18px;
+        height: 18px;
+        top: -20px; /* Ajusta a posição para telas menores */
+        right: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .close-bubbles {
+        font-size: 10px;
+        width: 16px;
+        height: 16px;
+        top: -18px; /* Ajusta a posição para telas ainda menores */
+        right: 2px;
+    }
+}
+
+/* Chatbot - Estilos com máxima especificidade e depuração */
+#chatbot {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 10000 !important; /* Aumenta o z-index para garantir prioridade */
+}
+
+#chatbot .chatbot-icon {
+    width: 60px !important;
+    height: 60px !important;
+    background: linear-gradient(45deg, #1a73e8, #2c5282) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+    transition: transform 0.3s !important;
+}
+
+#chatbot .chatbot-icon:hover {
+    transform: scale(1.1) !important;
+}
+
+#chatbot .chatbot-icon img {
+    width: 40px !important;
+    height: 40px !important;
+}
+
+#chatbot .chatbot-content {
+    width: 300px !important;
+    background: #ffffff !important;
+    border: 2px solid #e5e7eb !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+    padding: 15px !important;
+    position: absolute !important;
+    bottom: 70px !important;
+    right: 0 !important;
+    transition: opacity 0.3s, transform 0.3s !important;
+    z-index: 10001 !important; /* Aumenta o z-index para garantir prioridade sobre outros elementos */
+}
+
+body.dark #chatbot .chatbot-content {
+    background: #2d3748 !important;
+    border-color: #4a5568 !important;
+}
+
+#chatbot .chatbot-content.hidden {
+    opacity: 0 !important;
+    transform: translateY(20px) !important;
+    pointer-events: none !important;
+}
+
+#chatbot .chat-output {
+    height: 200px !important;
+    overflow-y: auto !important;
+    margin-bottom: 15px !important;
+    padding: 10px !important;
+    background-color: #f6f7f8 !important;
+    border-radius: 5px !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    line-height: 1.5 !important;
+}
+
+body.dark #chatbot .chat-output {
+    background-color: #2d3748 !important;
+    border-color: #4a5568 !important;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+}
+
+#chatbot .chat-message.user {
+    background-color: #e3f2fd !important;
+    border: 1px solid #00ced1 !important;
+    border-radius: 5px !important;
+    padding: 8px 12px !important;
+    margin: 5px 0 !important;
+    text-align: right !important;
+    color: #000000 !important;
+    animation: slideInRight 0.5s ease-out !important;
+}
+
+#chatbot .chat-message.bot {
+    background-color: #ffffff !important;
+    border: 1px solid #adb6c9 !important;
+    border-radius: 5px !important;
+    padding: 8px 12px !important;
+    margin: 5px 0 !important;
+    text-align: left !important;
+    color: #333333 !important;
+    animation: slideInLeft 0.5s ease-out !important;
+}
+
+body.dark #chatbot .chat-message.user {
+    background-color: #4a5568 !important;
+    border-color: #00ced1 !important;
+    color: #ffffff !important;
+}
+
+body.dark #chatbot .chat-message.bot {
+    background-color: #2d3748 !important;
+    border-color: #4a5568 !important;
+    color: #ffffff !important;
+}
+
+#chatbot input {
+    width: 100% !important;
+    padding: 10px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 5px !important;
+    font-size: 1rem !important;
+    transition: border-color 0.3s, box-shadow 0.3s !important;
+}
+
+#chatbot input:focus {
+    border-color: #00ced1 !important;
+    box-shadow: 0 0 5px rgba(0, 206, 209, 0.5) !important;
+    outline: none !important;
+}
+
+/* Feedback Visual para Links */
+.chat-message a {
+    color: #007bff;
+    text-decoration: underline;
+    font-weight: bold;
+}
+.chat-message a:hover {
+    color: #0056b3;
+}
+
+
+/* Responsividade do Chatbot */
+@media (max-width: 768px) {
+    #chatbot {
+        bottom: 15px !important;
+        right: 15px !important;
+    }
+
+    #chatbot .chatbot-icon {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    #chatbot .chatbot-icon img {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    #chatbot .chatbot-content {
+        width: 550px !important; /* Reduz para 550px, menor que 600px para evitar "esticado" */
+        max-width: 95% !important; /* Mantém 95% para maximizar a largura em celulares, com !important */
+        right: 2.5% !important; /* Centraliza ainda mais, ajustando a posição, com !important */
+        bottom: 60px !important; /* Mantém a distância do fundo consistente, com !important */
+        padding: 10px !important; /* Mantém o padding, mas ajustado para telas pequenas, com !important */
+    }
+
+
+    #chatbot .chat-output {
+        height: 200px !important; /* Mantém a altura original para consistência com telas grandes */
+        padding: 8px !important;
+    }
+
+    #chatbot input {
+        padding: 8px !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #chatbot {
+        bottom: 10px !important;
+        right: 10px !important;
+    }
+
+    #chatbot .chatbot-icon {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    #chatbot .chatbot-icon img {
+        width: 25px !important;
+        height: 25px !important;
+    }
+
+    #chatbot .chatbot-content {
+        width: 550px !important; /* Mantém 550px para evitar "fino" e "esticado", com !important */
+        max-width: 95% !important; /* Mantém 95% para maximizar a largura em telas muito pequenas, com !important */
+        right: 2.5% !important;
+        bottom: 50px !important; /* Ajusta para telas menores, com !important */
+        padding: 8px !important;
+    }
+
+    #chatbot .chat-output {
+        height: 200px !important; /* Mantém a altura original para consistência */
+        padding: 6px !important;
+    }
+
+    #chatbot input {
+        padding: 6px !important;
+        font-size: 0.8rem !important;
+    }
+}
+
+@media (max-width: 320px) {
+    #chatbot {
+        bottom: 5px !important;
+        right: 5px !important;
+    }
+
+    #chatbot .chatbot-icon {
+        width: 35px !important;
+        height: 35px !important;
+    }
+
+    #chatbot .chatbot-icon img {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    #chatbot .chatbot-content {
+        width: 550px !important; /* Mantém 550px para evitar "fino" e "esticado", com !important */
+        max-width: 95% !important; /* Mantém 95% para maximizar a largura em telas muito pequenas, com !important */
+        right: 2.5% !important;
+        bottom: 45px !important;
+        padding: 6px !important;
+    }
+
+    #chatbot .chat-output {
+        height: 200px !important; /* Mantém a altura original para consistência */
+        padding: 5px !important;
+    }
+
+    #chatbot input {
+        padding: 5px !important;
+        font-size: 0.7rem !important;
+    }
+}
+
+@media (min-width: 768px) {
+    #chatbot .chatbot-content {
+        width: 300px !important; /* Reforça o layout original nas telas grandes, com !important */
+        max-width: none !important; /* Remove qualquer restrição de max-width em telas grandes, com !important */
+    }
+}
+
+@media (min-width: 1200px) {
+    #chatbot {
+        bottom: 30px !important;
+        right: 30px !important;
+    }
+}
+
+/* Animações */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* Depuração Avançada */
+@media (max-width: 768px) {
+    #chatbot .chatbot-content {
+        background-color: rgba(254, 252, 252, 0) !important; /* Destaca o pop-up para teste */
+        border: 2px solid rgb(249, 247, 247) !important; /* Adiciona borda para visualizar limites */
+        width: 550px !important; /* Mantém 550px para teste */
+        max-width: 95% !important; /* Garante que não ultrapasse a tela */
+        min-width: 300px !important; /* Define um mínimo para evitar "fino" extremo */
+        right: 2.5% !important;
+        bottom: 60px !important;
+        padding: 10px !important;
+    }
+}
+
+/* Serviços */
+#servicos {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #f9f9f9, #e5e7eb);
+    position: relative;
+}
+
+body.dark #servicos {
+    background: linear-gradient(135deg, #222, #333);
+}
+
+#servicos h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #1a73e8;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.service {
+    background: linear-gradient(135deg, #fff, #f5f5f5);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    transition: transform 0.4s, box-shadow 0.4s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+body.dark .service {
+    background: linear-gradient(135deg, #333, #444);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.service:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 15px rgba(26, 115, 232, 0.2);
+}
+
+.service img {
+    max-width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+
+.service:hover img {
+    transform: scale(1.05);
+}
+
+.service h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: #2c5282;
+    transition: color 0.3s;
+}
+
+body.dark .service h3 {
+    color: #a0aec0;
+}
+
+.service:hover h3 {
+    color: #1a73e8;
+}
+
+.service p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0;
+}
+
+body.dark .service p {
+    color: #a0aec0;
+}
+
+/* Responsividade dos Serviços */
+@media (max-width: 768px) {
+    #servicos {
+        padding: 60px 15px;
+    }
+
+    #servicos h2 {
+        font-size: 2rem;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .service {
+        height: 150px;
+        padding: 10px;
+    }
+
+    .service img {
+        max-width: 60px;
+        height: 60px;
+    }
+
+    .service h3 {
+        font-size: 1rem;
+    }
+
+    .service p {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #servicos {
+        padding: 60px 15px;
+    }
+
+    #servicos h2 {
+        font-size: 1.8rem;
+    }
+
+    .service {
+        height: 120px;
+        padding: 8px;
+    }
+
+    .service img {
+        max-width: 50px;
+        height: 50px;
+    }
+
+    .service h3 {
+        font-size: 0.9rem;
+    }
+
+    .service p {
+        font-size: 0.7rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .services-grid {
+        gap: 10px;
+    }
+}
+
+/* Depoimentos */
+.testimonials {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #e5e7eb, #f9f9f9);
+    position: relative;
+}
+
+body.dark .testimonials {
+    background: linear-gradient(135deg, #333, #444);
+}
+
+.testimonials h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: #1a73e8;
+}
+
+.owl-carousel {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.testimonial-item {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+body.dark .testimonial-item {
+    background: #333;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.testimonial-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 30px rgba(26, 115, 232, 0.3);
+}
+
+.testimonial-item p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+body.dark .testimonial-item p {
+    color: #a0aec0;
+}
+
+.testimonial-item h4 {
+    font-size: 1rem;
+    color: #2c5282;
+    font-weight: 600;
+    margin: 0;
+}
+
+body.dark .testimonial-item h4 {
+    color: #a0aec0;
+}
+
+/* Estilos para as fotos dos clientes */
+.owl-carousel .testimonial-item .client-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    display: block;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+}
+
+.client-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+body.dark .client-photo {
+    border: 2px solid #a0aec0;
+}
+
+/* Responsividade dos Depoimentos */
+@media (max-width: 768px) {
+    .testimonials {
+        padding: 60px 15px;
+    }
+
+    .testimonials h2 {
+        font-size: 2rem;
+    }
+
+    .client-photo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .owl-carousel .testimonial-item .client-photo {
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 8px;
+        display: block;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+    }
+
+    .testimonial-item h4 {
+        font-size: 0.9rem;
+    }
+
+    .testimonial-item {
+        padding: 20px;
+        margin: 5px;
+    }
+
+    .testimonial-item p {
+        font-size: 0.9rem;
+    }
+
+    .owl-carousel {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonials {
+        padding: 60px 15px;
+    }
+
+    .testimonials h2 {
+        font-size: 1.8rem;
+    }
+
+    .testimonial-item {
+        padding: 20px;
+        margin: 5px;
+    }
+
+    .testimonial-item p {
+        font-size: 0.9rem;
+    }
+
+    .testimonial-item h4 {
+        font-size: 0.8rem;
+    }
+
+    .client-photo {
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
+    }
+}
+
+@media (max-height: 480px) and (min-width: 768px) {
+    .owl-carousel {
+        max-width: 90%;
+    }
+
+    .testimonial-item {
+        padding: 15px;
+    }
+}
+
+/* Estatísticas */
+.stats {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #679ce3, #2c5282);
+    color: white;
+    text-align: center;
+}
+
+.stats .container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    width: 200px;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.stat-item:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.stat-item h3 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.stat-item p {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* Responsividade das Estatísticas */
+@media (max-width: 768px) {
+    .stats {
+        padding: 60px 15px;
+    }
+
+    .stats .container {
+        gap: 20px;
+    }
+
+    .stat-item {
+        width: 150px;
+        padding: 20px;
+    }
+
+    .stat-item h3 {
+        font-size: 2rem;
+    }
+
+    .stat-item p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stat-item {
+        width: 120px;
+        padding: 15px;
+    }
+
+    .stat-item h3 {
+        font-size: 1.5rem;
+    }
+
+    .stat-item p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .stats .container {
+        gap: 60px;
+    }
+}
+
+/* Sobre */
+#sobre {
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #f9f9f9, #e5e7eb);
+    position: relative;
+}
+
+body.dark #sobre {
+    background: linear-gradient(135deg, #1a1a1a, #222);
+}
+
+#sobre h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #1a73e8;
+}
+
+#sobre p {
+    font-size: 1.2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.8;
+    color: #666;
+}
+
+body.dark #sobre p {
+    color: #a0aec0;
+}
+
+/* Responsividade do Sobre */
+@media (max-width: 768px) {
+    #sobre {
+        padding: 60px 15px;
+    }
+
+    #sobre h2 {
+        font-size: 2rem;
+    }
+
+    #sobre p {
+        font-size: 1rem;
+        max-width: 100%;
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    #sobre h2 {
+        font-size: 1.5rem;
+    }
+
+    #sobre p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Contato (Footer) - Ajustes Gerais */
+footer {
+    background: linear-gradient(135deg, #4299e1, #2d3748);
+    color: white;
+    padding: 80px 20px 20px;
+    text-align: center;
+    position: relative;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.footer-left {
+    background: #4a5568;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.partners-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+}
+
+.partners-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1.6fr 0.6fr;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: start;
+}
+
+.partners-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.partners-list li {
+    margin-bottom: 10px;
+}
+
+.partners-list a {
+    color: #e2e8f0;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 1rem;
+}
+
+.partners-list a:hover {
+    color: #ffeb3b;
+}
+
+.footer-bottom-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.social-icons {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin-left: 15px;
+    color: white;
+    font-size: 2rem;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.social-icons a:hover {
+    color: #ffeb3b;
+    transform: scale(1.1);
+}
+
+.footer-info {
+    text-align: center;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.footer-info a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.footer-info a:hover {
+    color: #ffeb3b;
+    text-decoration: underline;
+}
+
+.footer-info p {
+    margin: 5px 0;
+}
+
+.footer-right {
+    background: linear-gradient(135deg, #4299e1, #2d3748);
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 0;
+    /* Remove min-width fixo para melhor responsividade */
+}
+
+footer h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+    max-width: 100%;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+    font-size: 0.9rem;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: border-color 0.3s, background 0.3s;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: #ffeb3b;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+}
+
+form textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+form button {
+    padding: 14px 30px;
+    background: linear-gradient(45deg, #ffeb3b, #ffd700);
+    color: #1a73e8;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 235, 59, 0.5);
+    width: 100%;
+    margin-top: 10px;
+}
+
+form button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 235, 59, 0.7);
+}
+
+/* Responsividade do Contato */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .footer-left,
+    .footer-right {
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+        padding: 15px;
+    }
+
+    footer {
+        padding: 60px 15px 15px;
+    }
+
+    footer h2 {
+        font-size: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    form input,
+    form textarea {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    form button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .partners-grid {
+        grid-template-columns: repeat(2, 1fr);
+        text-align: center;
+        gap: 15px;
+    }
+
+    /* Oculta a terceira coluna (Parceiro 3, 6, 9) em celulares */
+    .partners-grid> :nth-child(3n),/* Oculta os itens da terceira coluna */
+    .partners-grid> :nth-child(3n-1)~ :nth-child(n) {/* Oculta os itens subsequentes da terceira coluna */
+        display: none !important;
+    }
+
+    .partners-title {
+        font-size: 1.2rem;
+    }
+
+    .partners-list a {
+        font-size: 0.9rem;
+    }
+
+    .social-icons a {
+        font-size: 1.5rem;
+        margin-left: 12px;
+    }
+
+    .footer-info {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    footer {
+        padding: 40px 10px 10px;
+    }
+
+    .footer-content {
+        gap: 10px;
+    }
+
+    footer h2 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 8px;
+    }
+
+    form label {
+        font-size: 0.8rem;
+    }
+
+    form input,
+    form textarea {
+        padding: 6px;
+        font-size: 0.7rem;
+        border-radius: 6px;
+    }
+
+    form textarea {
+        height: 60px;
+    }
+
+    form button {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+    }
+
+    .partners-grid {
+        grid-template-columns: repeat(2, 1fr);
+        text-align: center;
+        gap: 15px;
+    }
+
+     /* Oculta a terceira coluna (Parceiro 3, 6, 9) em celulares */
+     .partners-grid> :nth-child(3n),/* Oculta os itens da terceira coluna */
+     .partners-grid> :nth-child(3n-1)~ :nth-child(n) {/* Oculta os itens subsequentes da terceira coluna */
+        display: none !important;
+    }
+
+    .partners-list a {
+        font-size: 0.9rem;
+    }
+
+    .social-icons a {
+        font-size: 1.5rem;
+        margin-left: 10px;
+    }
+
+    .footer-info {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 320px) {
+    footer {
+        padding: 30px 5px 5px;
+    }
+
+    .footer-content {
+        gap: 5px;
+    }
+
+    footer h2 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 6px;
+    }
+
+    form label {
+        font-size: 0.7rem;
+    }
+
+    form input,
+    form textarea {
+        padding: 4px;
+        font-size: 0.6rem;
+    }
+
+    form textarea {
+        height: 50px;
+    }
+
+    form button {
+        padding: 6px 12px;
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-height: 480px) and (min-width: 768px) {
+    .partners-grid {
+        grid-template-columns: repeat(2, 1fr);
+        text-align: center;
+        gap: 10px;
+    }
+ /* Oculta a terceira coluna (Parceiro 3, 6, 9) em celulares */
+ .partners-grid> :nth-child(3n),/* Oculta os itens da terceira coluna */
+ .partners-grid> :nth-child(3n-1)~ :nth-child(n) {/* Oculta os itens subsequentes da terceira coluna */
+    display: none !important;
+}
+
+    .footer-bottom-content {
+        flex-direction: row;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .social-icons {
+        text-align: right;
+    }
+}
+
+@media (min-width: 1200px) {
+    .footer-left {
+        max-width: 700px;
+    }
+
+    .footer-right {
+        min-width: 500px;
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Botão Voltar ao Topo */
+#backToTop {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #1a73e8, #2c5282);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#backToTop.visible {
+    opacity: 1;
+}
+
+#backToTop:hover {
+    transform: scale(1.1);
+}
+
+/* Responsividade do Botão Voltar ao Topo */
+@media (max-width: 768px) {
+    #backToTop {
+        bottom: 60px;
+        left: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #backToTop {
+        width: 40px;
+        height: 40px;
+        bottom: 10px;
+        left: 10px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-height: 480px) and (min-width: 768px) {
+    #backToTop {
+        bottom: 20px;
+        left: 20px;
+    }
+}
+
+/* Estilo para o parágrafo "Powered By" */
+.powered {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: white;
+    text-align: center;
+}
+
+.powered a {
+    color: #ffeb3b;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.powered a:hover {
+    color: #ffd700;
+    text-decoration: underline;
+}
+
+.powered .dev-emoji {
+    font-size: 14px; /* Tamanho do emoji */
+    display: inline-block; /* Necessário para transform */
+    transition: transform 0.3s ease, color 0.3s ease; /* Transição suave */
+    vertical-align: middle; /* Alinha com o texto */
+}
+
+.powered .dev-emoji:hover {
+    transform: scale(1.2); /* Aumenta o emoji */
+    color: #ffd700; /* Muda a cor do emoji */
+}
+/* Estilização personalizada para o banner de cookies */
+.cc-window {
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.9rem;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cc-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cc-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 235, 59, 0.5);
+}
+
+/* Responsividade Geral (Retina Displays) */
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+
+    .logo img,
+    .service img,
+    .client-photo {
+        image-rendering: -webkit-optimize-contrast;
+    }
+}
