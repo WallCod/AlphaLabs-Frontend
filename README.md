@@ -39,9 +39,10 @@ Bem-vindo ao **Alpha Labs**, uma plataforma de ponta especializada em automaçã
  - **Tratamento de Erros:** Middlewares de erro e try/catch nas rotas são bem implementados. A distinção de mensagem de erro entre production e development é uma prática de segurança muito boa.
  - **Conexão MongoDB:** Configurações de timeout razoáveis e tratamento de erro fatal.
  - **Nodemailer:** Verificação de conexão e tratamento de reenvio são robustos.
-
-
-    
+ - **CORS:** Configuração segura para evitar ataques de cross-site scripting.
+ - **Chatbot (AlphaBot):** Funções de engajamento, alternância de modo claro/escuro e rolagem suave.
+ - **Infraestrutura:** Hospedagem no Render, pinger no UptimeRobot para evitar dormência.
+ - 
 
 ---
 
