@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Alpha Labs - Soluções de automação com inteligência artificial">
+    <link rel="icon" href="img/favicon/leo.png" type="image/png">
+    <title>Alpha Labs - Automação com Inteligência Artificial</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="./img/logo2.png" alt="Logo Alpha Labs" width="120" height="108">
+                <h1>Alpha Labs</h1>
+            </div>
+            <div class="menu-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav aria-label="Navegação principal">
+                <ul class="nav-links">
+                    <li><a href="#inicio" class="active">Início</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#depoimentos">Depoimentos</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                    <li><button id="themeToggle" aria-label="Alternar tema">🌙</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Modal para Agendamento de Teste Grátis -->
+    <div id="demoModal" class="modal" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal" aria-label="Fechar modal">×</span>
+            <h2>Agendar Teste Grátis</h2>
+            <form id="demoForm" action="/api/agendar-demo" method="POST">
+                <div class="form-group">
+                    <label for="demoName">Nome:</label>
+                    <input type="text" id="demoName" name="name" required aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="demoEmail">Email:</label>
+                    <input type="email" id="demoEmail" name="email" required aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="demoPhone">Telefone:</label>
+                    <input type="tel" id="demoPhone" name="phone" required aria-required="true"
+                        placeholder="(11) 98765-4321">
+                </div>
+                <div class="form-group">
+                    <label for="demoDate">Data e Hora Preferida:</label>
+                    <input type="datetime-local" id="demoDate" name="date" required aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="demoMessage">Comentários ou Necessidades Específicas:</label>
+                    <textarea id="demoMessage" name="message" aria-required="false"></textarea>
+                </div>
+                <button type="submit">Enviar Solicitação</button>
+            </form>
+            <!-- Pop-up de sucesso para o formulário de demonstração (opcional, se você quiser) -->
+            <div id="demoSuccessPopup" class="popup hidden" role="alert">
+                <div class="popup-content">
+                    <p>Solicitação de demonstração enviada com sucesso!</p>
+                    <button id="closeDemoPopup">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção de Apresentação -->
+    <section id="inicio" class="hero">
+        <div class="container">
+            <h2>Bem-vindo à Alpha Labs</h2>
+            <p>Transforme sua empresa com soluções de automação inovadoras e inteligência artificial. Na Alpha Labs,
+                desvendamos o futuro dos negócios, conectando dados, pessoas e máquinas em uma sinfonia de eficiência.
+                Deixe-nos guiá-lo por uma jornada onde o impossível se torna rotina e o crescimento é impulsionado pela
+                mente incansável da tecnologia.</p>
+            <button id="demoBtn" aria-label="Agendar Teste Grátis">Agendar Teste Grátis</button>
+            <p id="result" class="result"></p>
+        </div>
+
+<!-- Container geral do chatbot -->
+<div class="chatbot-wrapper">
+    <!-- Balões de texto -->
+    <div class="chatbot-bubbles">
+        <span class="close-bubbles">X</span>
+        <div class="bubble bubble-1">Olá! Eu sou o Alpha, seu assistente virtual. 👋</div>
+        <div class="bubble bubble-2">Como posso te ajudar hoje?</div>
+    </div>
+</div>
+
+        <!-- Chatbot Retrátil -->
+        <div id="chatbot" class="chatbot">
+            <div id="chatbotIcon" class="chatbot-icon" aria-label="Abrir chatbot" role="button" aria-expanded="false">
+                <img src="./img/robot.png" alt="Ícone de Robô" width="40" height="40">
+            </div>
+            <div id="chatbotContent" class="chatbot-content hidden" aria-hidden="true">
+                <div id="chatOutput" class="chat-output"></div>
+                <div style="font-size: 12px; color: green; margin: 5px;">Alpha está online 🟢</div>
+                <input type="text" id="chatInput" placeholder="Oi, como posso ajudar hoje? 😊"
+                    aria-label="Digite sua mensagem para o chatbot">  
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Serviços -->
+    <section id="servicos">
+        <div class="container">
+            <h2>Nossos Serviços</h2>
+            <div class="services-grid">
+                <article class="service" data-aos="fade-up" data-aos-delay="100">
+                    <img src="./img/img.png" alt="Atendimento Humanizado" width="80" height="80">
+                    <h3>Atendimento Humanizado</h3>
+                    <p>Otimize seus processos, sem perder a essência humana.</p>
+                </article>
+                <article class="service" data-aos="fade-up" data-aos-delay="200">
+                    <img src="./img/img2.png" alt="Atendente Virtual" width="80" height="80">
+                    <h3>Atendente Virtual</h3>
+                    <p>Automatize mensagens em WhatsApp e redes sociais.</p>
+                </article>
+                <article class="service" data-aos="fade-up" data-aos-delay="300">
+                    <img src="./img/img1.png" alt="Chatbot com IA" width="80" height="80">
+                    <h3>Chatbot com IA</h3>
+                    <p>Potencialize vendas com IA avançada.</p>
+                </article>
+                <article class="service" data-aos="fade-up" data-aos-delay="400">
+                    <img src="./img/img3.png" alt="Análise Preditiva" width="80" height="80">
+                    <h3>Análise Preditiva</h3>
+                    <p>Previse tendências para decisões estratégicas.</p>
+                </article>
+                <article class="service" data-aos="fade-up" data-aos-delay="500">
+                    <img src="./img/img4.png" alt="Automação de Fluxo" width="80" height="80">
+                    <h3>Automação de Fluxo</h3>
+                    <p>Elimine tarefas repetitivas com workflows inteligentes.</p>
+                </article>
+                <article class="service" data-aos="fade-up" data-aos-delay="600">
+                    <img src="./img/img5.png" alt="Reconhecimento de Voz" width="80" height="80">
+                    <h3>Catálogo Digital</h3>
+                    <p>Seu catálogo disponível em todas as redes sociais de forma rápida.</p>
+                </article>
+                <article class="service" data-aos="fade-up" data-aos-delay="700">
+                    <img src="./img/img6.png" alt="Reconhecimento de Imagem" width="80" height="80">
+                    <h3>Pix Bot</h3>
+                    <p>Pagamento instantâneo em suas redes sociais.</p>
+                </article>
+                <article class="service" data-aos="fade-up" data-aos-delay="800">
+                    <img src="./img/img7.png" alt="Integração E-commerce" width="80" height="80">
+                    <h3>Integração E-commerce</h3>
+                    <p>Conecte plataformas com assistentes virtuais.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Depoimentos (modificada) -->
+    <section id="depoimentos" class="testimonials">
+        <div class="container">
+            <h2>O Que Nossos Clientes Dizem</h2>
+            <div class="owl-carousel">
+                <div class="testimonial-item" data-aos="fade-up">
+                    <p>"A Alpha Labs transformou nossa operação com chatbots incríveis. Nossos clientes estão mais
+                        satisfeitos!"</p>
+                    <div class="client-info">
+                        <img src="./img/clients/João.jpg" alt="Foto de João Silva" class="client-photo">
+                        <h4>- João Silva, CEO da TechDelivery</h4>
+                    </div>
+                </div>
+                <div class="testimonial-item" data-aos="fade-up" data-aos-delay="200">
+                    <p>"Automação preditiva nos ajudou a prever demandas e crescer 30% em vendas."</p>
+                    <div class="client-info">
+                        <img src="./img/clients/Maria.jpg" alt="Foto de Maria Oliveira" class="client-photo">
+                        <h4>- Maria Oliveira, Gerente da HealthTech</h4>
+                    </div>
+                </div>
+                <div class="testimonial-item" data-aos="fade-up" data-aos-delay="400">
+                    <p>"Soluções personalizadas que economizaram horas de trabalho. Excelente parceria!"</p>
+                    <div class="client-info">
+                        <img src="./img/clients/Pedro.jpg" alt="Foto de Pedro Santos" class="client-photo">
+                        <h4>- Pedro Santos, Lojas Rápidas</h4>
+                    </div>
+                </div>
+                <div class="testimonial-item" data-aos="fade-up" data-aos-delay="600">
+                    <p>"A automação de pagamentos via PixBot foi um game-changer para o nosso negócio. Aumentamos a
+                        eficiência e reduzimos os erros significativamente!"</p>
+                    <div class="client-info">
+                        <img src="./img/clients/Luana.jpg" alt="Foto de Luana Silva" class="client-photo">
+                        <h4>Luana Silva, Gestão Financeira Ltda.</h4>
+                    </div>
+                </div>
+                <div class="testimonial-item" data-aos="fade-up" data-aos-delay="800">
+                    <p>"O catálogo digital foi um divisor de águas para a nossa empresa. Agora, nossos clientes podem
+                        navegar facilmente pelos produtos e fazer pedidos de forma rápida e segura"</p>
+                    <div class="client-info">
+                        <img src="./img/clients/Rafael.jpg" alt="Foto de Rafael Oliveira" class="client-photo">
+                        <h4>Rafael Oliveira, Diretor Comercial da Oliveira & Cia.</h4>
+                    </div>
+                </div>
+                <div class="testimonial-item" data-aos="fade-up" data-aos-delay="1000">
+                    <p>"A integração ao e-commerce foi incrivelmente fácil e eficaz. Agora, podemos gerenciar nossos
+                        pedidos e estoque de forma centralizada e automática"</p>
+                    <div class="client-info">
+                        <img src="./img/clients/Marina.jpg" alt="Foto de Marina Rodrigues" class="client-photo">
+                        <h4>Marina Rodrigues, Gerente E-commerce de Loja Virtual</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Estatísticas -->
+    <section id="stats" class="stats">
+        <div class="container">
+            <div class="stat-item" data-aos="fade-up">
+                <h3>100+</h3>
+                <p>Empresas Atendidas</p>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                <h3>95%</h3>
+                <p>Satisfação do Cliente</p>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                <h3>2+</h3>
+                <p>Anos de Experiência</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Sobre -->
+    <section id="sobre">
+        <div class="container">
+            <h2>Sobre Nós</h2>
+            <p>Na Alpha Labs, estamos na vanguarda da automação com inteligência artificial, oferecendo soluções
+                inovadoras que transformam a maneira como as empresas operam. Nossa missão é aumentar a eficiência,
+                reduzir custos e proporcionar resultados excepcionais por meio de tecnologias avançadas adaptadas às
+                necessidades de cada cliente. Com uma equipe de especialistas em IA, desenvolvemos ferramentas como
+                chatbots inteligentes que gerenciam interações em tempo real, sistemas de análise preditiva que
+                antecipam tendências de mercado, automação de fluxos de trabalho para eliminar tarefas repetitivas, e
+                soluções de reconhecimento de voz e imagem que otimizam processos em setores como saúde, varejo e
+                logística. Seja para personalizar experiências do cliente, integrar plataformas de e-commerce com
+                assistentes virtuais ou criar sistemas de monitoramento autônomo, a Alpha Labs está comprometida em
+                impulsionar o sucesso dos nossos parceiros com tecnologia de ponta e estratégias sob medida.</p>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer id="contato">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <h2 class="partners-title">Parceiros</h2>
+                    <div class="partners-grid">
+                        <ul class="partners-list">
+                            <li><a href="https://parceiro1.com" target="_blank">Parceiro 1</a></li>
+                            <li><a href="https://parceiro4.com" target="_blank">Parceiro 4</a></li>
+                            <li><a href="https://parceiro7.com" target="_blank">Parceiro 7</a></li>
+                        </ul>
+                        <ul class="partners-list">
+                            <li><a href="https://parceiro2.com" target="_blank">Parceiro 2</a></li>
+                            <li><a href="https://parceiro5.com" target="_blank">Parceiro 5</a></li>
+                            <li><a href="https://parceiro8.com" target="_blank">Parceiro 8</a></li>
+                        </ul>
+                        <ul class="partners-list">
+                            <li><a href="https://parceiro3.com" target="_blank">Parceiro 3</a></li>
+                            <li><a href="https://parceiro6.com" target="_blank">Parceiro 6</a></li>
+                            <li><a href="https://parceiro9.com" target="_blank">Parceiro 9</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-bottom-content">
+                        <div class="social-icons">
+                            <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i
+                                    class="fab fa-twitter"></i></a>
+                            <a href="https://tiktok.com" target="_blank" aria-label="TikTok"><i
+                                    class="fab fa-tiktok"></i></a>
+                            <a href="https://wa.me/+55739" target="_blank" aria-label="WhatsApp"><i
+                                    class="fab fa-whatsapp"></i></a>
+                            <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i
+                                    class="fab fa-linkedin-in"></i></a>
+                        </div>
+                        <div class="footer-info">
+                            <p>© 2025 Alpha Labs v.1.0 - Todos os direitos reservados.</p>
+                            <p><a href="https://drive.google.com/file/d/1cNQHFEjoE9cSHoePseuca0ralOGovBFA/view?usp=drive_link"
+                                    target="_blank">Termos Gerais e Condições </a> |
+                                <a href="https://drive.google.com/file/d/1ZJxe9l40eUq0MP_DXlyLF2ocAYp24fJ8/view"
+                                    target="_blank">Politica de Privacidade</a>
+                            </p>
+                            <p>Email: alphalabsia@gmail.com | Telefone: (73) 98159-7856</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-right">
+                    <h2>Entre em Contato</h2>
+                    <form id="contactForm" action="/api/contato" method="POST">
+                        <div class="form-group">
+                            <label for="nome">Nome:</label>
+                            <input type="text" id="nome" name="nome" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem:</label>
+                            <textarea id="mensagem" name="mensagem" required aria-required="true"></textarea>
+                        </div>
+                        <button type="submit">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <p class="powered">Developed by: <a href="https://www.linkedin.com/in/wallax-figueiredo-41116b285/" target="_blank">WallCod</a>
+            <span class="dev-emoji" style="font-size: 14px; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">🦁</span>
+</p>
+    </footer>
+
+    <!-- Pop-up de sucesso para o formulário de contato -->
+    <div id="successPopup" class="popup hidden" role="alert">
+        <div class="popup-content">
+            <p>Mensagem enviada com sucesso!</p>
+            <button id="closePopup">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Botão de Voltar ao Topo -->
+    <button id="backToTop" aria-label="Voltar ao topo">↑</button>
+    </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script defer src="./script.js"></script>
+
+    <!-- Scripts js-cookie e google tag manager -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W7WMFN7H84"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+
+    console.log("Verificando cookie de consentimento...");
+    if (!Cookies.get('cookieConsent')) {
+        console.log("Cookie de consentimento não encontrado, exibindo popup...");
+        const popup = document.createElement('div');
+        popup.id = 'cookie-consent-popup'; // Adiciona um ID único
+        popup.style.position = 'fixed';
+        popup.style.bottom = '20px';
+        popup.style.left = '50%';
+        popup.style.transform = 'translateX(-50%)';
+        popup.style.background = '#f9f9f9';
+        popup.style.padding = '15px 25px';
+        popup.style.borderRadius = '10px';
+        popup.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+        popup.style.width = '400px';
+        popup.style.border = '1px solid #ddd';
+        popup.style.zIndex = '1000';
+        popup.style.fontFamily = 'Arial, sans-serif';
+        popup.style.textAlign = 'center';
+        popup.innerHTML = `
+            <p style="margin: 0 0 10px 0; color: #333;">Este site usa cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="https://drive.google.com/file/d/1ZJxe9l40eUq0MP_DXlyLF2ocAYp24fJ8/view" target="_blank" style="color: #1a73e8; text-decoration: underline;">Política de Privacidade</a>.</p>
+            <button onclick="acceptCookies()" style="background: #ffeb3b; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; color: #1a73e8; font-weight: bold;">Aceitar</button>
+        `;
+        document.body.appendChild(popup);
+    } else {
+        console.log("Cookie de consentimento já existe:", Cookies.get('cookieConsent'));
+    }
+
+    function acceptCookies() {
+        Cookies.set('cookieConsent', 'accepted', { expires: 7 });
+        const popup = document.getElementById('cookie-consent-popup'); // Seleciona pelo ID
+        if (popup) {
+            popup.remove(); // Remove o popup
+            console.log("Popup removido com sucesso.");
+        } else {
+            console.error("Popup não encontrado para remoção.");
+        }                                      
+        console.log("Cookies aceitos, ativando GTM...");
+        gtag('js', new Date());
+        gtag('config', 'G-W7WMFN7H84');
+    }
+</script>
+</body>
+</html>
